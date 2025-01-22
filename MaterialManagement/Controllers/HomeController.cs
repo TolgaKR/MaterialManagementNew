@@ -23,7 +23,9 @@ namespace MaterialManagement.Controllers
         {
             //var malzeme = _malzemeDal.List();
             //var a = 7;
-
+            var b = 8; 
+            
+            var c= 9;
 
             return View();
         }
