@@ -7,27 +7,23 @@ namespace MaterialManagement.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly IMalzemeDal _malzemeDal;
+        private readonly IMalzemeDal _malzemeDal;
 
         
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger/*IMalzemeDal malzemeDal*/)
+        public HomeController(ILogger<HomeController> logger,IMalzemeDal malzemeDal)
         {
-            // _malzemeDal = malzemeDal;
+            _malzemeDal = malzemeDal;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            //var malzeme = _malzemeDal.List();
-            //var a = 7;
-            var b = 8; 
-            
-            var c= 9;
-
-            return View();
+            var malzeme = _malzemeDal.List();  // Bu, malzeme listesini alýyor
+            ViewBag.Malzeme = malzeme;  // Veriyi ViewBag'e gönderiyorum.
+            return View(malzeme);
         }
 
         public IActionResult Privacy()

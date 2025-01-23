@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaterialManagement.Business.Abstract
 {
-    public interface IUrınTipiTablosuService
+    public interface IUrunTipiTablosuService
     {
 
         Task<List<UrunTipiTablosu>> GetAllUrunTablsouAsync();

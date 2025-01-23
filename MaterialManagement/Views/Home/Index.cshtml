@@ -1,8 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using MaterialManagement.Entity.Concrete;
 
-<div class="text-center">
-    <h1 class="display-4">Malzeme Yonetim Sistemi</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+<div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Malzeme Grup</th>
+                <th scope="col">Stok Miktarı</th>
+                <th scope="col">Birim</th>
+                <th scope="col">Price</th>
+                <th scope="col">Aciklama</th>
+                <th scope="col">Fotograf</th>
+               
+                <th scope="col">Urun Tipi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)  
+               {
+                   <tr>
+                    <th scope="row">@item.Id</th>  <!-- ID alanını item'den alıyoruz -->
+                    <td>@item.MalzemeAdi</td>  <!-- Name alanını item'den alıyoruz -->
+                    <td>@item.MalzemeGrupId</td>  <!-- Description alanını item'den alıyoruz -->
+                    <td>@item.StokMiktari</td>  <!-- Diğer alanı item'den alıyoruz -->
+                    <td>@item.Birim</td>  <!-- Diğer alanı item'den alıyoruz -->
+                    <td>@item.Price</td>  <!-- Diğer alanı item'den alıyoruz -->
+                    <td>@item.Aciklama</td>  <!-- Diğer alanı item'den alıyoruz -->
+                    <td>@item.Fotograf</td>  <!-- Diğer alanı item'den alıyoruz -->
+                    
+                    <td>@item.Fiyat</td>  <!-- Diğer alanı item'den alıyoruz -->
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

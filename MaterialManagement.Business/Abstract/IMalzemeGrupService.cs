@@ -10,9 +10,9 @@ namespace MaterialManagement.Business.Abstract
         public interface IMalzemeGrupService
         {
             Task<List<MalzemeGrup>> GetAllMalzemeGrupAsync();
-            Task AddMalzemeGrup (MalzemeGrup malzemeGrup);
-            Task UpdateMalzemeGrup(MalzemeGrup malzemeGrup);
-            Task DeleteMalzemeGrup(int malzemeGrupId);
+            Task AddMalzemeGrupAsync(MalzemeGrup malzemeGrup);
+            Task UpdateMalzemeGrupAsync(MalzemeGrup malzemeGrup);
+            Task DeleteMalzemeGrupAsync(int malzemeGrupId);
             Task<MalzemeGrup> GetByMalzemeGrupIdAsync(int malzemeGrupId);
         }
     }
