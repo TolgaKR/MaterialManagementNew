@@ -25,6 +25,10 @@ namespace MaterialManagement.Data
             // IdentityDbContext'in varsayılan yapılandırmasını ekler
             base.OnModelCreating(modelBuilder);
 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AppUser>().Property(u => u.Address).HasMaxLength(500);
+
+
             // Fiyat Tablosu
             modelBuilder.Entity<Fiyat>(entity =>
             {

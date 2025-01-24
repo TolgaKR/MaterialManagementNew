@@ -1,3 +1,5 @@
+using MaterialManagement.Business.Abstract;
+using MaterialManagement.Business.Concrete;
 using MaterialManagement.Data;
 using MaterialManagement.Data.Abstract;
 using MaterialManagement.Data.Concrete;
@@ -34,9 +36,11 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
     .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(MaterialManagement.Business.Abstract.IRepository<>), typeof(GenericRepository<>));
 
 builder.Services.AddScoped<IMalzemeDal, EfMalzemeRepo>();//Þuan bunu program cs bildirdik. IMalzeme
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();

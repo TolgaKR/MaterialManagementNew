@@ -10,7 +10,7 @@ namespace MaterialManagement.Business.Abstract
 {
     public interface IUserService
     {
-        Task<IdentityResult> RegisterUserAsync(string email, string password); //Register yaptık
+        Task<IdentityResult> RegisterUserAsync(string email, string password,string address,string phoneNumber,string name,string surname,string idcard,string depertment); //Register yaptık
         Task<IdentityResult> UpdateUserAsync(AppUser user);//Güncelleme
         Task<IdentityResult> DeleteUserAsync(string userId);//Silme
         Task<AppUser> GetUserByIdAsync(string userId);//KullanıcıCagirdk

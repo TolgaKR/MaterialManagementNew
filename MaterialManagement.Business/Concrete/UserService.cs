@@ -1,54 +1,84 @@
-﻿using MaterialManagement.Business.Abstract;
-using MaterialManagement.Data;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using MaterialManagement.Business.Abstract;
+using MaterialManagement.Business.Concrete;
 using MaterialManagement.Entity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaterialManagement.Business.Concrete
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<AppUser> _userManager;
-
-        public UserService (UserManager<AppUser> userManager)
+        public readonly UserManager<AppUser> _userManager;
+        public UserService(UserManager<AppUser> userManager)
         {
-            _userManager= userManager;
+            _userManager = userManager;
         }
-
-
-        public Task<IdentityResult> DeleteUserAsync(string userId)
+        public async Task<IdentityResult> DeleteUserAsync(string userId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<AppUser> GetUserByIdAsync(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IdentityResult> RegisterUserAsync(string email, string password)
-        {
-            
-            var user = new AppUser //Kullanıcı Nesnesi Olusturduk
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
             {
-                UserName = email,
-                Email = email
-            };
+                throw new InvalidOperationException("User id bulunamadı");
+            }
 
-            
-            var result = await _userManager.CreateAsync(user, password); // Şifreyi ve kullanıcıyı kaydet.
-
-            return result;
+            return await _userManager.DeleteAsync(user);
         }
 
-        public Task<IdentityResult> UpdateUserAsync(AppUser user)
+        public async Task<AppUser> GetUserByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with ID '{userId}' not found.");
+            }
+
+            return user;
         }
+
+        public async Task<IdentityResult> RegisterUserAsync(string email, string password, string address, string phoneNumber, string name, string surname, string idcard,string depertment)
+        {
+            var user = new AppUser
+            {
+                Email = email,
+                UserName = email,
+                Address = address,
+                PhoneNumber = phoneNumber,
+                Name = name,
+                Surname = surname,
+                IdentityCard = idcard,
+                Department=depertment
+            };
+            return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(AppUser user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "Kullanıcı nesnesi null olamaz");
+            }
+
+            var existingUser = await _userManager.FindByIdAsync(user.Id);
+            if (existingUser == null)
+            {
+                throw new InvalidOperationException($"User.id null olamaz.");
+            }
+
+            existingUser.Email = user.Email;
+            existingUser.UserName = user.UserName;
+
+
+            return await _userManager.UpdateAsync(existingUser);
+        }
+
+      
+     
     }
 }
+
+
+
+
+

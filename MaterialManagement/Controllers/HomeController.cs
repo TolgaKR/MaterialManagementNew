@@ -11,7 +11,7 @@ namespace MaterialManagement.Controllers
 
         
 
-        private readonly ILogger<HomeController> _logger;
+       private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger,IMalzemeDal malzemeDal)
         {
@@ -22,8 +22,8 @@ namespace MaterialManagement.Controllers
         public IActionResult Index()
         {
             var malzeme = _malzemeDal.List();  // Bu, malzeme listesini alýyor
-            ViewBag.Malzeme = malzeme;  // Veriyi ViewBag'e gönderiyorum.
-            return View(malzeme);
+            ViewBag.Malzeme = malzeme;  // Veriyi ViewBag'e gönderiyorum. */
+            return View();
         }
 
         public IActionResult Privacy()
